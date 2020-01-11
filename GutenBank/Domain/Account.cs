@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -19,5 +20,7 @@ namespace GutenBank.Domain
 
         [Required]
         public Currency Currency { get; set; }
+
+        public virtual ICollection<Transaction> Transactions { get; set; }
     }
 }

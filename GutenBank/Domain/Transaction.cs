@@ -12,6 +12,11 @@ namespace GutenBank.Domain
         public TransactionType Type { get; set; }
 
         public TransactionStatus Status { get; set; }
+
+        public int AccountNumber { get; set; }
+
+        [ForeignKey("AccountNumber")]
+        public Account Account { get; set; }
     }
 }
     

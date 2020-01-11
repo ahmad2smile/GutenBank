@@ -4,6 +4,7 @@
     {
         Success,
         InsufficientBalanceError,
+        UpdateNotAllowed,
         UnknowError
     }
 }

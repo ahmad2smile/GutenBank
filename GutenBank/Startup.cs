@@ -1,4 +1,5 @@
 using GutenBank.Data;
+using GutenBank.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -19,8 +20,10 @@ namespace GutenBank
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(Configuration["ConnectionString:BankDb"]));
             services.AddControllers();
+
+            services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(Configuration["ConnectionString:BankDb"]));
+            services.AddScoped<IAccountService, AccountService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

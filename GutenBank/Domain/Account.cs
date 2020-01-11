@@ -16,7 +16,8 @@ namespace GutenBank.Domain
         public byte[] Version { get; set; }
 
         [Required]
-        public int Balance { get; set; }
+        [Column(TypeName = "Money")]
+        public decimal Balance { get; set; }
 
         [Required]
         public Currency Currency { get; set; }

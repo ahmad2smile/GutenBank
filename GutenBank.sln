@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GutenBank", "GutenBank\GutenBank.csproj", "{0AB4185A-07EE-442C-B3CF-E5FD1061A2FC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0AB4185A-07EE-442C-B3CF-E5FD1061A2FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AB4185A-07EE-442C-B3CF-E5FD1061A2FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AB4185A-07EE-442C-B3CF-E5FD1061A2FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AB4185A-07EE-442C-B3CF-E5FD1061A2FC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {964D4B92-7D9E-4CFA-8867-414D413E14FC}
+	EndGlobalSection
+EndGlobal

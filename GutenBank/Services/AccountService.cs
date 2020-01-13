@@ -27,10 +27,8 @@ namespace GutenBank.Services
                 throw new NotFoundException(new AccountDTO
                 {
                     AccountNumber = accountNumber,
-                    Balance = account.Balance,
-                    Currency = account.Currency.ToString(),
-                    Successful = true,
-                    Message = new Message(TransactionStatus.Success).ToString()
+                    Successful = false,
+                    Message = new Message().ToString()
                 });
             }
 
@@ -62,6 +60,16 @@ namespace GutenBank.Services
             {
                 var account = await _context.Accounts.FindAsync(transaction.AccountNumber);
 
+                if (account == null)
+                {
+                    throw new NotFoundException(new AccountDTO
+                    {
+                        AccountNumber = transaction.AccountNumber,
+                        Successful = false,
+                        Message = new Message().ToString()
+                    });
+                }
+
                 // TODO: Handle Currency Conversion if needed
                 var amount = transaction.Amount;
 
@@ -69,7 +77,11 @@ namespace GutenBank.Services
                 {
                     account.Balance += amount;
                 }
-                else if(account.Balance < amount)
+                else if(account.Balance >= amount)
+                {
+                    account.Balance -= amount;
+                }
+                else
                 {
                     transactionStatus = TransactionStatus.InsufficientBalanceError;
 
@@ -80,13 +92,8 @@ namespace GutenBank.Services
                         Message = new Message(transactionStatus).ToString()
                     });
                 }
-                else
-                {
-                    account.Balance -= amount;
-                }
 
-
-                _context.Entry(account).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
 
                 return new AccountDTO
                 {
@@ -118,6 +125,7 @@ namespace GutenBank.Services
                 };
 
                 await _context.Transactions.AddAsync(executedTransaction);
+                await _context.SaveChangesAsync();
             }
         }
     }

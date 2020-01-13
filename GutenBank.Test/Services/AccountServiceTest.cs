@@ -3,7 +3,9 @@ using GutenBank.Domain;
 using GutenBank.Exceptions;
 using GutenBank.Models;
 using GutenBank.Test;
+using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -122,6 +124,20 @@ namespace GutenBank.Services.Tests
             };
 
             Assert.ThrowsAsync<NotFoundException>(async () => await _accountService.Withdraw(transaction));
+        }
+
+        [Test]
+        public async Task ConcurrencyError()
+        {
+            var account = _dbContext.Accounts.FirstOrDefault(a => a.AccountNumber == 1);
+
+            _dbContext.Entry(account).State = EntityState.Deleted;
+
+            await _dbContext.SaveChangesAsync(); // Version Got Updated
+
+            _dbContext.Entry(account).State = EntityState.Modified; // Modified after Entity in Db was changed
+
+            Assert.ThrowsAsync<DbUpdateConcurrencyException>(() => _dbContext.SaveChangesAsync());  // Old Version
         }
     }
 }

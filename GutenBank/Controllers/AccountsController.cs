@@ -95,7 +95,7 @@ namespace GutenBank.Controllers
 
             try
             {
-                var account = await _accountService.Deposit(transaction);
+                var account = await _accountService.Withdraw(transaction);
 
                 return account;
             }

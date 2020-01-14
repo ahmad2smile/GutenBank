@@ -1,54 +1,48 @@
 ﻿using GutenBank.TestE2E.Services;
-using Konsole;
 using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Threading.Tasks;
+using System.Timers;
 
 namespace GutenBank.TestE2E
 {
     class Program
     {
         private static DataService _dataService = new DataService();
+        private static UiService _uiService = new UiService();
+        private static Random _randomNumber = new Random();
 
-        static async Task Main(string[] args)
+        static void Main(string[] args)
         {
-            var totalRequests = 3;
+            _uiService.Init();
 
-            var tasks = new List<Task<HttpStatusCode>>();
-            var bar = new ProgressBar(PbStyle.DoubleLine, totalRequests);
+            _uiService.OnRefresh += RefreshHandler;
 
-            for (int i = 0; i < totalRequests; i++)
-            {
-                // tasks.Add(_dataService.GetBalance());
-                tasks.Add(_dataService.PostDeposit());
-                //tasks.Add(_dataService.PostDeposit());
-            }
-
-            bar.Refresh(0, "");
-
-            var result = await Task.WhenAll(tasks.ToArray());
-
-            var success = 0;
-            var failed = 0;
-
-            foreach (var res in result)
-            {
-                if (res == HttpStatusCode.OK)
-                {
-                    success += 1;
-                    bar.Refresh(success, $"{success} Success of 300");
-                }
-                else
-                {
-                    Console.WriteLine(res.ToString());
-
-                    failed += 1;
-                }
-            }
-
-            Console.WriteLine($"{failed} Failed of 300");
             Console.ReadLine();
+        }
+
+        private static async void RefreshHandler(object sender, Timer timer)
+        {
+            timer.Stop();
+
+            var testStatus = new TestStatus
+            {
+                ConcurrentBalanceRequest = _randomNumber.Next(3),
+                ConcurrentUpdateRequest = _randomNumber.Next(3),
+                Message = "Starting new requests..."
+            };
+
+            _uiService.Update(testStatus);
+
+            var getResults = await _dataService.SetupGetRequests(testStatus.ConcurrentBalanceRequest);
+
+            var updateResults = await _dataService.SetupUpdateRequests(testStatus.ConcurrentUpdateRequest);
+
+            testStatus.BalanceResult = getResults;
+            testStatus.UpdateResult = updateResults;
+            testStatus.Message = "Requests Completed...";
+
+            _uiService.Update(testStatus);
+
+            timer.Start();
         }
     }
 }

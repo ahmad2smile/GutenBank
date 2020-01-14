@@ -25,8 +25,8 @@ namespace GutenBank.TestE2E
 
             var testStatus = new TestStatus
             {
-                ConcurrentBalanceRequest = _randomNumber.Next(3),
-                ConcurrentUpdateRequest = _randomNumber.Next(3),
+                ConcurrentBalanceRequest = _randomNumber.Next(300),
+                ConcurrentUpdateRequest = _randomNumber.Next(10),
                 Message = "Starting new requests..."
             };
 

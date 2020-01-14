@@ -119,8 +119,6 @@ namespace GutenBank.TestE2E.Services
                 }
                 else
                 {
-                    Console.WriteLine(res.ToString());
-
                     failed += 1;
                 }
             }

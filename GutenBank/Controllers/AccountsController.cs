@@ -68,7 +68,7 @@ namespace GutenBank.Controllers
             }
             catch (UpdateNotAllowedException ex)
             {
-                return Unauthorized(ex.Account);
+                return Conflict(ex.Account);
             }
             catch (Exception)
             {
@@ -109,7 +109,7 @@ namespace GutenBank.Controllers
             }
             catch (UpdateNotAllowedException ex)
             {
-                return Unauthorized(ex.Account);
+                return Conflict(ex.Account);
             }
             catch (Exception)
             {

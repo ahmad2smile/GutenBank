@@ -55,11 +55,10 @@ namespace GutenBank.Services
         private async Task<AccountDTO> ExecuteTransaction(TransactionDTO transaction, TransactionType type)
         {
             var transactionStatus = TransactionStatus.Success;
+            var account = await _context.Accounts.FindAsync(transaction.AccountNumber);
 
             try
             {
-                var account = await _context.Accounts.FindAsync(transaction.AccountNumber);
-
                 if (account == null)
                 {
                     throw new NotFoundException(new AccountDTO
@@ -77,7 +76,7 @@ namespace GutenBank.Services
                 {
                     account.Balance += amount;
                 }
-                else if(account.Balance >= amount)
+                else if (account.Balance >= amount)
                 {
                     account.Balance -= amount;
                 }
@@ -94,6 +93,7 @@ namespace GutenBank.Services
                 }
 
                 await _context.SaveChangesAsync();
+
 
                 return new AccountDTO
                 {
@@ -117,6 +117,9 @@ namespace GutenBank.Services
             }
             finally
             {
+                _context.Entry(account).State = EntityState.Detached;
+                await _context.SaveChangesAsync();
+
                 var executedTransaction = new Transaction
                 {
                     AccountNumber = transaction.AccountNumber,

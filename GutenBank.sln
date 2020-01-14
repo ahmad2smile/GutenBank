@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GutenBank", "GutenBank\GutenBank.csproj", "{0AB4185A-07EE-442C-B3CF-E5FD1061A2FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GutenBank.Test", "GutenBank.Test\GutenBank.Test.csproj", "{8220826F-D8E1-40FE-9605-D1CEC08C0314}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GutenBank.Test", "GutenBank.Test\GutenBank.Test.csproj", "{8220826F-D8E1-40FE-9605-D1CEC08C0314}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GutenBank.TestE2E", "GutenBank.TestE2E\GutenBank.TestE2E.csproj", "{160AD36C-912E-42CC-B459-A324632B7B9D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{8220826F-D8E1-40FE-9605-D1CEC08C0314}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8220826F-D8E1-40FE-9605-D1CEC08C0314}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8220826F-D8E1-40FE-9605-D1CEC08C0314}.Release|Any CPU.Build.0 = Release|Any CPU
+		{160AD36C-912E-42CC-B459-A324632B7B9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{160AD36C-912E-42CC-B459-A324632B7B9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{160AD36C-912E-42CC-B459-A324632B7B9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{160AD36C-912E-42CC-B459-A324632B7B9D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

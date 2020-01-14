@@ -31,7 +31,7 @@ Refer: [MS Doc](https://docs.microsoft.com/en-us/ef/core/managing-schemas/migrat
 ## Testing
 
 1. Unit Tests Run `GutenBank.Test`
-2. E2E Tests Run `GutenBank.E2E` 
+2. E2E Tests Run `GutenBank` API & `GutenBank.E2E` Tester
 
 E2E Testing is setup with custom implementation with random inputs for Concurrency Error with *HTTP 409* using Console based UI with [Konsole](https://github.com/goblinfactory/konsole).
 
